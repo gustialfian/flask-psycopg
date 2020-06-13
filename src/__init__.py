@@ -1,5 +1,6 @@
 from flask import Flask
 from src.blueprint import (
+  blueprint,
   hello,
 )
 
@@ -20,4 +21,5 @@ def create_app():
 
 def register_blueprints(app):
     """Register Flask blueprints."""
+    app.register_blueprint(blueprint)
     app.register_blueprint(hello.blueprint)

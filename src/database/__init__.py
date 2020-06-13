@@ -8,9 +8,9 @@ def get_db_connection():
     """
     print("get_db_connection")
     try:
-        conn = connect(user="postgres", 
+        conn = connect(user="sandbox", 
                       host="localhost", 
-                      password="postgres", 
+                      password="sandbox", 
                       port="5432", 
                       dbname="sandbox")
         # ini apa ???
