@@ -27,8 +27,11 @@ def query():
   return "No query string received", 200
 
 @blueprint.route("/methods", methods=["GET","POST"])
-@blueprint.route("/methods/<id>", methods=["PUT", "DELETE"])
+@blueprint.route("/methods/<id>", methods=["GET", "PUT", "DELETE"])
 def methods(id=None):
+  if request.method == "GET" and id:
+    return get_id_methods(id)
+
   if request.method == "POST":
     return post_methods()
 
@@ -42,18 +45,32 @@ def methods(id=None):
 
 
 def get_methods():
-  print(request.args)
-  return jsonify("hit get")
+  return jsonify({
+    "msg": "hit get",
+    "args": request.args,
+  })
+
+def get_id_methods(id):
+  return jsonify({
+    "msg": "hit get",
+    "id": id,
+  })
 
 def post_methods():
-  print(request.get_json())
-  return jsonify("hit post")
+  return jsonify({
+    "msg": "hit post",
+    "get_json": request.get_json(),
+  })
 
 def put_methods(id):
-  print(request.get_json())
-  print(id)
-  return jsonify("hit put")
+  return jsonify({
+    "msg": "hit put",
+    "id": id,
+    "get_json": request.get_json(),
+  })
 
 def delete_methods(id):
-  print(id)
-  return jsonify("hit delete")
+  return jsonify({
+    "msg": "hit delete",
+    "id": id,
+  })

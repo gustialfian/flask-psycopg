@@ -21,3 +21,8 @@ run this command after add new dependency
 ```bash
 venv/bin/pip freeze > requirements.txt
 ```
+
+# task
+- [] logging
+- [] better db conn management
+- [] pagination with datatabel jquery
