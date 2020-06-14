@@ -1,13 +1,14 @@
 from flask import Flask
+
+from src.config import load_config
 from src.blueprint import (
   blueprint,
   hello,
 )
-from src.config import Config
 
 def create_app():
   """An application factory."""
-  Config()
+  load_config()
   app = Flask(__name__)
 
   app.config.from_object(__name__)

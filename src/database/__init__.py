@@ -1,7 +1,6 @@
+import os
 from contextlib import contextmanager
 from psycopg2 import connect, extras
-
-from src.config import Config
 
 @contextmanager
 def get_db_connection():
@@ -9,13 +8,12 @@ def get_db_connection():
   return db connection 
   """
   print("get_db_connection")
-  config = Config.get_instance().values
   try:
-    conn = connect(user=config.DB_USER, 
-            host=config.DB_HOST, 
-            password=config.DB_PASS, 
-            port=config.DB_PORT, 
-            dbname=config.DB_NAME)
+    conn = connect(user=os.getenv("DB_USER"), 
+            host=os.getenv("DB_HOST"), 
+            password=os.getenv("DB_PASS"), 
+            port=os.getenv("DB_PORT"), 
+            dbname=os.getenv("DB_NAME"))
     # ini apa ???
     # conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
     yield conn
@@ -36,7 +34,4 @@ def get_db_cursor():
       yield cursor
     finally:
       cursor.close()
-
-
-class DB:
   
